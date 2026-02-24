@@ -1,0 +1,35 @@
+# Binaries
+bin/cezar
+bin/cezar.exe
+*.exe
+*.out
+
+# Output files
+out/*.txt
+
+# Go build artifacts
+*.o
+*.a
+*.so
+
+# Go test files
+*.test
+
+# Go coverage
+*.out
+coverage.html
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.tmp
