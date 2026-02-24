@@ -10,7 +10,7 @@
 
 ## Folders
 - `src/` source code
-- `bin/` compiled binary
+- `cezar` compiled binary
 - `examples/` input files
 - `out/` output files
 - `test.sh` tests
@@ -18,13 +18,13 @@
 ## Build
 ```bash
 cd src
-go build -o ../bin/cezar
+go build -o ../cezar
 cd ..
 ```
 
 ## Run
 ```bash
-./bin/cezar [-c|-a] [-e|-d|-j|-k]
+./cezar [-c|-a] [-e|-d|-j|-k]
 ```
 
 Use exactly:
@@ -66,22 +66,22 @@ Valid `a`: `1,3,5,7,9,11,15,17,19,21,23,25`
 ## Quick examples
 Encrypt (affine):
 ```bash
-./bin/cezar -a -e
+./cezar -a -e
 ```
 
 Decrypt (affine):
 ```bash
-./bin/cezar -a -d
+./cezar -a -d
 ```
 
 Known-plaintext attack (Caesar):
 ```bash
-./bin/cezar -c -j
+./cezar -c -j
 ```
 
 Brute-force attack (Caesar):
 ```bash
-./bin/cezar -c -k
+./cezar -c -k
 ```
 
 ## Tests

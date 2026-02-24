@@ -27,10 +27,10 @@ cp "$EXAMPLES_DIR"/extra.txt "$BACKUP_DIR"/extra.txt
 echo "=== Building program ==="
 (
     cd "$ROOT_DIR/src"
-    go build -o "$ROOT_DIR/bin/cezar"
+    go build -o "$ROOT_DIR/cezar"
 )
 
-if [ ! -f "$ROOT_DIR/bin/cezar" ]; then
+if [ ! -f "$ROOT_DIR/cezar" ]; then
     echo "Build failed!"
     exit 1
 fi
@@ -45,7 +45,7 @@ mkdir -p "$OUT_DIR"
 echo "=== Test 1: Caesar Cipher Encryption ==="
 echo "HELLO WORLD" > "$EXAMPLES_DIR/plain.txt"
 echo "3" > "$EXAMPLES_DIR/key.txt"
-"$ROOT_DIR/bin/cezar" -c -e
+"$ROOT_DIR/cezar" -c -e
 
 if [ -f "$OUT_DIR/crypto.txt" ]; then
     actual="$(cat "$OUT_DIR/crypto.txt")"
@@ -62,7 +62,7 @@ echo ""
 echo "=== Test 2: Caesar Cipher Decryption ==="
 echo "KHOOR ZRUOG" > "$EXAMPLES_DIR/crypto.txt"
 echo "3" > "$EXAMPLES_DIR/key.txt"
-"$ROOT_DIR/bin/cezar" -c -d
+"$ROOT_DIR/cezar" -c -d
 
 if [ -f "$OUT_DIR/decrypt.txt" ]; then
     actual="$(cat "$OUT_DIR/decrypt.txt")"
@@ -78,7 +78,7 @@ echo ""
 echo "=== Test 3: Affine Cipher Encryption ==="
 echo "THE QUICK BROWN FOX" > "$EXAMPLES_DIR/plain.txt"
 echo "3 5" > "$EXAMPLES_DIR/key.txt"
-"$ROOT_DIR/bin/cezar" -a -e
+"$ROOT_DIR/cezar" -a -e
 
 if [ -f "$OUT_DIR/crypto.txt" ]; then
     actual="$(cat "$OUT_DIR/crypto.txt")"
@@ -95,7 +95,7 @@ echo ""
 echo "=== Test 4: Affine Cipher Decryption ==="
 echo "UMX FZRNB IKVJQ CVO" > "$EXAMPLES_DIR/crypto.txt"
 echo "3 5" > "$EXAMPLES_DIR/key.txt"
-"$ROOT_DIR/bin/cezar" -a -d
+"$ROOT_DIR/cezar" -a -d
 
 if [ -f "$OUT_DIR/decrypt.txt" ]; then
     actual="$(cat "$OUT_DIR/decrypt.txt")"
@@ -111,7 +111,7 @@ echo ""
 echo "=== Test 5: Known Plaintext Attack (Caesar) ==="
 echo "OLSSV DVYSK" > "$EXAMPLES_DIR/crypto.txt"
 echo "HELLO" > "$EXAMPLES_DIR/extra.txt"
-"$ROOT_DIR/bin/cezar" -c -j
+"$ROOT_DIR/cezar" -c -j
 
 if [ -f "$OUT_DIR/key-found.txt" ]; then
     found_key="$(cat "$OUT_DIR/key-found.txt")"
@@ -130,7 +130,7 @@ echo ""
 echo "=== Test 6: Known Plaintext Attack (Affine) ==="
 echo "ZRC KEWSG NPAOV HAT" > "$EXAMPLES_DIR/crypto.txt"
 echo "THE QUICK" > "$EXAMPLES_DIR/extra.txt"
-"$ROOT_DIR/bin/cezar" -a -j
+"$ROOT_DIR/cezar" -a -j
 
 if [ -f "$OUT_DIR/key-found.txt" ]; then
     found_key="$(cat "$OUT_DIR/key-found.txt")"
@@ -148,7 +148,7 @@ echo ""
 # Test 7: Brute force - Caesar
 echo "=== Test 7: Brute Force Attack (Caesar) ==="
 echo "FRPERG ZRFFNTR" > "$EXAMPLES_DIR/crypto.txt"
-"$ROOT_DIR/bin/cezar" -c -k
+"$ROOT_DIR/cezar" -c -k
 
 if [ -f "$OUT_DIR/decrypt.txt" ]; then
     echo "✓ Brute force successful"
@@ -163,7 +163,7 @@ echo ""
 # Test 8: Brute force - Affine (limited output)
 echo "=== Test 8: Brute Force Attack (Affine) ==="
 echo "YBPY" > "$EXAMPLES_DIR/crypto.txt"
-"$ROOT_DIR/bin/cezar" -a -k
+"$ROOT_DIR/cezar" -a -k
 
 if [ -f "$OUT_DIR/decrypt.txt" ]; then
     total="$(wc -l < "$OUT_DIR/decrypt.txt")"

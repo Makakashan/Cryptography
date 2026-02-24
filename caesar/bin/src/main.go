@@ -3,15 +3,21 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
-const (
-	inputDir  = "examples"
-	outputDir = "out"
+var (
+	inputDir  string
+	outputDir string
 )
 
 func main() {
+	if err := resolvePaths(); err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		os.Exit(1)
+	}
+
 	os.MkdirAll(outputDir, 0755)
 
 	var useCaesar, useAffine bool
@@ -71,6 +77,34 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}
+}
+
+func resolvePaths() error {
+	if dirExists("examples") {
+		inputDir = "examples"
+		outputDir = "out"
+		return nil
+	}
+
+	execPath, err := os.Executable()
+	if err != nil {
+		return fmt.Errorf("cannot detect executable path: %v", err)
+	}
+
+	baseDir := filepath.Dir(execPath)
+	execInput := filepath.Join(baseDir, "examples")
+	if dirExists(execInput) {
+		inputDir = execInput
+		outputDir = filepath.Join(baseDir, "out")
+		return nil
+	}
+
+	return fmt.Errorf("cannot find input directory 'examples' near current directory or executable")
+}
+
+func dirExists(path string) bool {
+	info, err := os.Stat(path)
+	return err == nil && info.IsDir()
 }
 
 func doEncrypt(useCaesar bool) error {
