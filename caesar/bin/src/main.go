@@ -135,6 +135,8 @@ func doEncrypt(useCaesar bool) error {
 	}
 
 	fmt.Println("Encryption completed successfully")
+	fmt.Printf("Result:\n%s\n", ciphertext)
+	fmt.Printf("Saved to: %s/crypto.txt\n", outputDir)
 	return nil
 }
 
@@ -169,6 +171,8 @@ func doDecrypt(useCaesar bool) error {
 	}
 
 	fmt.Println("Decryption completed successfully")
+	fmt.Printf("Result:\n%s\n", plaintext)
+	fmt.Printf("Saved to: %s/decrypt.txt\n", outputDir)
 	return nil
 }
 
@@ -219,6 +223,9 @@ func doKnownPlaintextAttack(useCaesar bool) error {
 
 	fmt.Println("Cryptanalysis completed successfully")
 	fmt.Printf("Found key: %s\n", keyStr)
+	fmt.Printf("Result:\n%s\n", plaintext)
+	fmt.Printf("Saved key to: %s/key-found.txt\n", outputDir)
+	fmt.Printf("Saved plaintext to: %s/decrypt.txt\n", outputDir)
 	return nil
 }
 
@@ -253,5 +260,7 @@ func doBruteForce(useCaesar bool) error {
 	}
 
 	fmt.Println("Brute-force completed successfully")
+	fmt.Printf("Result:\n%s\n", results.String())
+	fmt.Printf("Saved to: %s/decrypt.txt\n", outputDir)
 	return nil
 }
