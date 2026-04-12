@@ -1,0 +1,3 @@
+Crypto2026-demo-key
+tryby-ECB-CBC
+2026-semestr-letni
